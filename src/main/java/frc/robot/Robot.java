@@ -145,6 +145,7 @@ public class Robot extends TimedRobot {
   /** This function is called periodically during operator control. */
   @Override
   public void teleopPeriodic() {
+    SmartDashboard.putBoolean("Rotation Override", StateHandler.getInstance().getRotationOverride());
   }
 
   /** This function is called once when test mode is enabled. */

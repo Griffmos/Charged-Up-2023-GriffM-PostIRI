@@ -91,6 +91,8 @@ public class SwerveSubsystem extends SubsystemBase {
 
         for (SwerveModule mod : mSwerveMods) {
             mod.setDesiredState(swerveModuleStates[mod.moduleNumber], isOpenLoop);
+
+            SmartDashboard.putString("MOD "+mod.moduleNumber, "TRANSLATION "+translation.toString()+" "+mod.toString());
         }
     }
 
@@ -260,6 +262,8 @@ public class SwerveSubsystem extends SubsystemBase {
         PathPlannerServer.sendPathFollowingData(new Pose2d(), getPose());
 
         SmartDashboard.putNumber("ROBOT PITCH", getPitch().getDegrees());
+
+        SmartDashboard.putNumber("GYRO HEADING", gyro.getYaw());
 
 
         

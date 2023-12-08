@@ -22,6 +22,7 @@ import frc.robot.commands.IntakeCommands.SetIntakePosition;
 import frc.robot.commands.StateCommands.SetShootingLocation;
 import frc.robot.commands.StateCommands.ShootFront;
 import frc.robot.commands.SwerveCommands.AlignToTag;
+import frc.robot.commands.SwerveCommands.LockToGrid;
 import frc.robot.commands.SwerveCommands.SwerveXWheels;
 import frc.robot.commands.SwerveCommands.TeleopSwerve;
 import frc.robot.commands.SwerveCommands.TrajectoryToGoal;
@@ -66,6 +67,9 @@ public class RobotContainer {
     private final JoystickButton bButton = new JoystickButton(driver, XboxController.Button.kB.value);
     private final JoystickButton xButton = new JoystickButton(driver, XboxController.Button.kX.value);
     private final JoystickButton yButton = new JoystickButton(driver, XboxController.Button.kY.value);
+
+    //GRIFFM Addtion:
+    private final JoystickButton rSJoystickButton = new JoystickButton(driver, 12); //FIND THIS
 
     /* Operator Buttons */
     private final JoystickButton operatorSquareButton = new JoystickButton(operator, 3);
@@ -123,6 +127,17 @@ public class RobotContainer {
         new Trigger(() -> driver.getRawAxis(3) > 0.2).whileTrue(new IntakeGamePiece(IntakeWheelSpeeds.INTAKE));
         // new Trigger(() -> driver.getRawAxis(2) > 0.2).whileTrue(new AlignToTag(s_Swerve,() -> -driver.getRawAxis(translationAxis)));
         //new Trigger(() -> driver.getRawAxis(2) > 0.2).whileTrue(new TrajectoryToGoal(s_Swerve));
+
+        //GRIFFM ADDITION
+
+        rSJoystickButton.toggleOnTrue(
+            new LockToGrid(
+                        s_Swerve,
+                        () -> -driver.getRawAxis(translationAxis),
+                        () -> -driver.getRawAxis(strafeAxis),
+                        () -> leftBumper.getAsBoolean(),
+                        () -> rightBumper.getAsBoolean()));
+
 
         /*
          * Note for Aalind for button bindings:

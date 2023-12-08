@@ -35,6 +35,9 @@ public class StateHandler {
 
     private boolean LockWheels = false;
 
+    private boolean rotationOverride = false;
+
+
     //You could also use a boolean in the statehandler to set to true before running CommandScheduler.schedule 
     //and set it to false when the shot button is released and the end condition for the command is constantly checking that boolean
 
@@ -131,6 +134,10 @@ public class StateHandler {
         wantToBeHappy = s;
     }
 
+    public void setRotationOverride(boolean rO){
+        rotationOverride = rO;
+    }
+
     public boolean getWantToBeHappy() {
         return wantToBeHappy;
     }
@@ -163,6 +170,10 @@ public class StateHandler {
 
     public boolean getReadyToScore() {
         return readyToScore;
+    }
+
+    public boolean getRotationOverride(){
+        return rotationOverride;
     }
 
 

@@ -147,4 +147,10 @@ public class SwerveModule {
     public double getStateAngle(){
         return stateAngle;
     }
+
+
+    @Override
+    public String toString(){
+        return "OPTIMIZED ANGLE"+(int)currentOptimizedAngle;
+    }
 }
