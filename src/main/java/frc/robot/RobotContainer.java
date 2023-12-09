@@ -69,7 +69,7 @@ public class RobotContainer {
     private final JoystickButton yButton = new JoystickButton(driver, XboxController.Button.kY.value);
 
     //GRIFFM Addtion:
-    private final JoystickButton rSJoystickButton = new JoystickButton(driver, 12); //FIND THIS
+    private final JoystickButton rSJoystickButton = new JoystickButton(driver, 10); //FIND THIS
 
     /* Operator Buttons */
     private final JoystickButton operatorSquareButton = new JoystickButton(operator, 3);

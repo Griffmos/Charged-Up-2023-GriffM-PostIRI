@@ -263,7 +263,7 @@ public class SwerveSubsystem extends SubsystemBase {
 
         SmartDashboard.putNumber("ROBOT PITCH", getPitch().getDegrees());
 
-        SmartDashboard.putNumber("GYRO HEADING", gyro.getYaw());
+        SmartDashboard.putNumber("GYRO HEADING", getYaw().getDegrees());
 
 
         

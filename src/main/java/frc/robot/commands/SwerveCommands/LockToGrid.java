@@ -15,6 +15,7 @@ import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 public class LockToGrid extends CommandBase {
@@ -37,9 +38,16 @@ public class LockToGrid extends CommandBase {
         this.robotCentricSup = robotCentricSup;
         this.fieldSlowMode = fieldSlowMode;
 
-        angleGoal = 180;//(StateHandler.getInstance().ALLIANCE_COLOR==Alliance.Blue) ? 90 : 270; (we angle naturally toward midfield, grid behind us)
+        angleGoal = 180;//always will be 180, grid behind us
 
-        pid = new PIDController(0.1, 0, 0);
+
+
+
+        //p is 0.5/180
+        pid = new PIDController(0.0028, 0, 0);
+
+        pid.enableContinuousInput(-angleGoal, angleGoal );
+
 
     }
 
@@ -53,7 +61,16 @@ public class LockToGrid extends CommandBase {
         /* Get Values, Deadband */
 
 
+        //double minDiff = (s_Swerve.getYaw().getDegrees()>0) ? angleGoal : -angleGoal;
+
+
+
+
         double rotationPercent = pid.calculate(s_Swerve.getYaw().getDegrees(), angleGoal);
+
+        rotationPercent = (Math.abs(rotationPercent)>0.0001) ? rotationPercent : 0;
+
+        SmartDashboard.putNumber("PID OUTPUT", rotationPercent);
 
         double translationVal = MathUtil.applyDeadband(translationSup.getAsDouble(), Constants.stickDeadband);
         double strafeVal = MathUtil.applyDeadband(strafeSup.getAsDouble(), Constants.stickDeadband);
